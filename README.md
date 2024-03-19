@@ -9,10 +9,10 @@
 
 <!-- Badges -->
 <p align="center">
-  <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/realharshgautam/leetcode-solutions">
-  <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/realharshgautam/leetcode-solutions">
-  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/realharshgautam/leetcode-solutions">
-  <img alt="GitHub" src="https://img.shields.io/github/license/realharshgautam/leetcode-solutions">
+  <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/realharshgautam/Leetcode">
+  <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/realharshgautam/Leetcode">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/realharshgautam/Leetcode">
+  <img alt="GitHub" src="https://img.shields.io/github/license/realharshgautam/Leetcode">
 </p>
 
 <!-- Description -->
