@@ -7,6 +7,14 @@
   <br>
 </h1>
 
+<!-- Badges -->
+<p align="center">
+  <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/realharshgautam/leetcode-solutions">
+  <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/realharshgautam/leetcode-solutions">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/realharshgautam/leetcode-solutions">
+  <img alt="GitHub" src="https://img.shields.io/github/license/realharshgautam/leetcode-solutions">
+</p>
+
 <!-- Description -->
 <p align="center">
   Welcome to my LeetCode solutions repository! Here, you'll find a collection of my solutions to various LeetCode problems. Each solution is meticulously crafted and explained to aid in understanding and learning.
@@ -19,6 +27,8 @@
 - [Languages](#languages)
 - [Contributions](#contributions)
 - [Contact](#contact)
+- [Credits](#credits)
+- [How to Contribute](#how-to-contribute)
 
 <!-- Motivation -->
 ## Motivation
@@ -51,6 +61,24 @@ If you have any questions, suggestions, or improvements, don't hesitate to reach
 
 Feel free to reach out via email or connect with me on GitHub, LinkedIn, or Instagram for more updates and insights into my coding journey!
 
+<!-- Credits -->
+## Credits
+This repository wouldn't have been possible without the contributions and support from the following individuals:
+- [List of contributors]
+
+<!-- How to Contribute -->
+## How to Contribute to the Project
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/new-feature`).
+3. Make your changes.
+4. Commit your changes (`git commit -am 'Add new feature'`).
+5. Push to the branch (`git push origin feature/new-feature`).
+6. Create a new Pull Request.
+
+<!-- License -->
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 <!-- Footer -->
 <p align="center">
   <br>
@@ -58,4 +86,3 @@ Feel free to reach out via email or connect with me on GitHub, LinkedIn, or Inst
   <br>
   <sub><b>Happy Coding! 🚀</b></sub>
 </p>
-
