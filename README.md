@@ -64,7 +64,7 @@ Feel free to reach out via email or connect with me on GitHub, LinkedIn, or Inst
 <!-- Credits -->
 ## Credits
 This repository wouldn't have been possible without the contributions and support from the following individuals:
-- [List of contributors]
+- Tulika: [@tulika-5](https://www.github.com/tulika-5/)
 
 <!-- How to Contribute -->
 ## How to Contribute to the Project
@@ -74,6 +74,16 @@ This repository wouldn't have been possible without the contributions and suppor
 4. Commit your changes (`git commit -am 'Add new feature'`).
 5. Push to the branch (`git push origin feature/new-feature`).
 6. Create a new Pull Request.
+
+
+<!-- Collaborators -->
+<h2 align="center">Collaborators</h2>
+<p align="center">
+  <a href="https://github.com/realharshgautam/Leetcode/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=realharshgautam/Leetcode" />
+</a>
+</p>
+
 
 <!-- License -->
 ## License
