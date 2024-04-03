@@ -78,6 +78,8 @@ This repository wouldn't have been possible without the contributions and suppor
 
 <!-- Collaborators -->
 <h2 align="center">Collaborators</h2>
+Thank you to all the collaborators who have contributed to this repository! Your efforts have helped make this project a valuable resource for the coding community. Together, we're fostering a culture of learning and sharing knowledge. Keep up the great work! 🙌
+<br>
 <p align="center">
   <a href="https://github.com/realharshgautam/Leetcode/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=realharshgautam/Leetcode" />
