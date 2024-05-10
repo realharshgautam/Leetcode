@@ -1,36 +1,38 @@
 class Solution {
-public:
-    vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) {
-        // Custom comparator for min-heap
-        auto comp = [&arr](const std::pair<int, int>& a, const std::pair<int, int>& b) {
-            return arr[a.first] * arr[b.second] > arr[b.first] * arr[a.second];
-        };
+ public:
+  vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) {
+    const int n = arr.size();
+    double l = 0.0;
+    double r = 1.0;
 
-        // Priority queue (min-heap)
-        std::priority_queue<std::pair<int, int>,
-                            std::vector<std::pair<int, int>>, decltype(comp)>
-            pq(comp);
+    while (l < r) {
+      const double m = (l + r) / 2.0;
+      int fractionsNoGreaterThanM = 0;
+      int p = 0;
+      int q = 1;
 
-        // Initialize the heap with the first fraction of each numerator
-        for (int i = 0; i < arr.size() - 1; ++i) {
-            pq.emplace(i, arr.size() - 1);
+      // For each index i, find the first index j s.t. arr[i] / arr[j] <= m,
+      // so fractionsNoGreaterThanM for index i will be n - j.
+      for (int i = 0, j = 1; i < n; ++i) {
+        while (j < n && arr[i] > m * arr[j])
+          ++j;
+        if (j == n)
+          break;
+        fractionsNoGreaterThanM += n - j;
+        if (p * arr[j] < q * arr[i]) {
+          p = arr[i];
+          q = arr[j];
         }
+      }
 
-        // Binary search to find the next smaller denominator
-        for (int i = 1; i < k; ++i) {
-            auto top = pq.top();
-            pq.pop();
-            int numeratorIndex = top.first;
-            int denominatorIndex = top.second;
-
-            // Push the next smaller denominator for the current numerator
-            if (denominatorIndex - 1 > numeratorIndex) {
-                pq.emplace(numeratorIndex, denominatorIndex - 1);
-            }
-        }
-
-        // Return the k-th smallest fraction
-        auto result = pq.top();
-        return {arr[result.first], arr[result.second]};
+      if (fractionsNoGreaterThanM == k)
+        return {p, q};
+      if (fractionsNoGreaterThanM > k)
+        r = m;
+      else
+        l = m;
     }
+
+    throw;
+  }
 };
