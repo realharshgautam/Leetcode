@@ -1,17 +1,32 @@
 class Solution {
 public:
-    vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>> result;
-        int n = nums.size();
-        for (int i = 0; i < (1 << n); i++) {
-            vector<int> subset;
-            for (int j = 0; j < n; j++) {
-                if ((i & (1 << j)) > 0) {
-                    subset.push_back(nums[j]);
-                }
+
+        void subs(vector<int>& nums , vector<vector<int>>& finans , vector<int>& ans ,int i , int n){
+
+            if(i >= n){
+                finans.push_back(ans);
+                return;
             }
-            result.push_back(subset);
+
+            ans.push_back(nums[i]);
+            subs(nums , finans , ans , i+1 , n);
+            ans.pop_back();
+            subs(nums , finans , ans , i+1 , n );
+
+
         }
-        return result;
+
+
+    vector<vector<int>> subsets(vector<int>& nums) {
+
+        vector<vector<int>> finans;
+        vector<int> ans;
+        int n = nums.size();
+        int i = 0;
+
+        subs(nums , finans , ans , i , n);
+        return finans;
+
+        
     }
 };
