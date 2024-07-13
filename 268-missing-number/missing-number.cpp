@@ -1,14 +1,16 @@
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
-        int n = nums.size();
-        vector<int>v(n+1,-1);
-        for(int i =0;i<nums.size();i++){
-            v[nums[i]] = nums[i];
+        int xor1 = 0, xor2 = 0;
+        int N = nums.size();
+
+        // Use a single loop to compute both xor1 and xor2
+        for (int i = 0; i < N; i++) {
+            xor1 ^= (i + 1);  // XOR all indices from 1 to N
+            xor2 ^= nums[i];  // XOR all elements in the array
         }
-        for(int i =0;i<v.size();i++){
-            if(v[i]==-1)return i;
-        }
-        return 0;
+
+        // The missing number is the result of xor1 ^ xor2
+        return xor1 ^ xor2;
     }
 };
