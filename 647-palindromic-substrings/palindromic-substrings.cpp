@@ -1,27 +1,28 @@
 class Solution {
 public:
+    int countSubstrings(const string& s) {
+        int count = 0;
+    int n = s.length();
 
-    int expandaround(string s ,int i,int j){
-        int count =0;
-        while(i>=0&&j<s.length()&&s[i]==s[j]){
-            count++;
-            i--;
-            j++;
+    for (int i = 0; i < n; ++i) {
+        // Expand around the center for odd-length palindromes
+        int left = i, right = i;
+        while (left >= 0 && right < n && s[left] == s[right]) {
+            ++count; // Count the palindrome
+            --left;
+            ++right;
         }
-        return count;
+
+        // Expand around the center for even-length palindromes
+        left = i;
+        right = i + 1;
+        while (left >= 0 && right < n && s[left] == s[right]) {
+            ++count; // Count the palindrome
+            --left;
+            ++right;
+        }
     }
-    int countSubstrings(string s) {
 
-        int n = s.length();
-        int count =0;
-
-        for(int i = 0; i<n;i++){
-            int oddans = expandaround(s,i,i);
-            int evenans = expandaround(s,i,i+1);
-            count += oddans+evenans;
-        }
-
-        return count;
-        
+    return count;
     }
 };
