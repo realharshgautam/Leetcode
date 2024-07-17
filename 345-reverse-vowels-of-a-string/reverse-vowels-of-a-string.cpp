@@ -1,13 +1,14 @@
 class Solution {
 public:
 
-    bool isVowel(char ch){
-        ch = tolower(ch);
-        char arr[5] = {'a','e','i','o','u'};
-        for(int i =0; i<5; i++){
-            if(arr[i]==ch)return true;
-        }
-        return false;
+    bool isVowel(char c){
+        c = tolower(c);
+        // char arr[5] = {'a','e','i','o','u'};
+        // for(int i =0; i<5; i++){
+        //     if(arr[i]==ch)return true;
+        // }
+        // return false;
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
 
     }
     string reverseVowels(string s) {
