@@ -1,27 +1,31 @@
 class Solution {
 public:
+    string longestPalindrome(const std::string& s) {
+        int n = s.length();
+        if (n == 0) return "";
 
-    bool ispalindrome( string &s, int l, int r){
-        while(l<r){
-            if(s[l]!=s[r]) return false;
-            l++;
-            r--;
+        int longest_palindrome_start = 0;
+        int longest_palindrome_len = 1;
 
-        }
-        return true;
-    }
-    string longestPalindrome(string s) {
+        for (int i = 0; i < n; ++i) {
+            int right = i;
+            while (right < n && s[i] == s[right]) {
+                right++;
+            }
 
-        string ans ="";
-        for(int i=0;i<s.size();i++){
-            for(int j=i;j<s.size();j++){
-                if(ispalindrome(s,i,j)){
-                    string t =  s.substr(i,j-i+1);
-                    ans = t.size()> ans.size() ? t:ans;
-                }
+            int left = i - 1;
+            while (left >= 0 && right < n && s[left] == s[right]) {
+                left--;
+                right++;
+            }
+
+            int palindrome_len = right - left - 1;
+            if (palindrome_len > longest_palindrome_len) {
+                longest_palindrome_len = palindrome_len;
+                longest_palindrome_start = left + 1;
             }
         }
-        return ans;
-        
+
+        return s.substr(longest_palindrome_start, longest_palindrome_len);
     }
 };
