@@ -1,22 +1,38 @@
 class Solution {
 public:
-    bool find(TreeNode* n, int val, string& path) {
-        if (n->val == val)
-            return true;
-        if (n->left && find(n->left, val, path))
-            path.push_back('L');
-        else if (n->right && find(n->right, val, path))
-            path.push_back('R');
-        return !path.empty();
-    }
     string getDirections(TreeNode* root, int startValue, int destValue) {
-        string s_p, d_p;
-        find(root, startValue, s_p);
-        find(root, destValue, d_p);
-        while (!s_p.empty() && !d_p.empty() && s_p.back() == d_p.back()) {
-            s_p.pop_back();
-            d_p.pop_back();
+        ios::sync_with_stdio(false);
+        cin.tie(0);
+        
+        string path {}, startPath {}, endPath {};
+        postOrder(root, startValue, path, startPath); path.clear();
+        postOrder(root, destValue, path, endPath); path.clear();
+
+        string res {};
+        int go_up = startPath.size();
+        int i {};
+        for (i=0; i<startPath.size() && i < endPath.size() && startPath[i] == endPath[i]; ++i)
+            --go_up;
+        res += string(go_up, 'U');
+        for (int j=i; j<endPath.size(); ++j) res += endPath[j];
+        return res;
+    }
+private:
+    string startPath {};
+    string endPath {};
+    void postOrder(TreeNode* root, int val, string& path, string& result){
+        if (!root || !result.empty()) return;
+        if (root->val == val){
+            result = path;
+            return;
         }
-        return string(s_p.size(), 'U') + string(rbegin(d_p), rend(d_p));
+        
+        path += 'L';
+        postOrder(root->left, val, path, result);
+        path.pop_back();
+
+        path +='R';
+        postOrder(root->right, val, path, result);
+        path.pop_back();
     }
 };
