@@ -1,29 +1,48 @@
 class Solution {
 public:
-    static const int MOD = 1e9 + 7;
     int rangeSum(vector<int>& nums, int n, int left, int right) {
-        vector<int> sumSubarrays;
-        vector<int> prefix(nums.size());
-        prefix[0] = nums[0];
-        for (int i = 1; i < nums.size(); i++) {
-            prefix[i] = prefix[i - 1] + nums[i];
-        }
-        for (auto x : nums)
-            sumSubarrays.push_back(x);
-        for (int i = 0; i < nums.size(); i++) {
-            for (int j = i + 1; j < nums.size(); j++) {
-                if (i == 0)
-                    sumSubarrays.push_back(prefix[j]);
-                else
-                    sumSubarrays.push_back(prefix[j] - prefix[i - 1]);
+        long result =
+            (sumOfFirstK(nums, n, right) - sumOfFirstK(nums, n, left - 1)) %
+            mod;
+        // Ensure non-negative result
+        return (result + mod) % mod;
+    }
+
+private:
+    int mod = 1e9 + 7;
+    // Helper function to count subarrays with sum <= target and their total
+    // sum.
+    pair<int, long long> countAndSum(vector<int>& nums, int n, int target) {
+        int count = 0;
+        long long currentSum = 0, totalSum = 0, windowSum = 0;
+        for (int j = 0, i = 0; j < n; ++j) {
+            currentSum += nums[j];
+            windowSum += nums[j] * (j - i + 1);
+            while (currentSum > target) {
+                windowSum -= currentSum;
+                currentSum -= nums[i++];
             }
+            count += j - i + 1;
+            totalSum += windowSum;
         }
-        sort(sumSubarrays.begin(), sumSubarrays.end());
-        long long ans = 0;
-        //(a+b)%c=( (a%c)+(b%c) )%c
-        for (int i = left - 1; i < right; i++) {
-            ans = (ans + sumSubarrays[i]) % MOD;
+        return {count, totalSum};
+    }
+
+    // Helper function to find the sum of the first k smallest subarray sums.
+    long long sumOfFirstK(vector<int>& nums, int n, int k) {
+        int minSum = *min_element(nums.begin(), nums.end());
+        int maxSum = accumulate(nums.begin(), nums.end(), 0);
+        int left = minSum, right = maxSum;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (countAndSum(nums, n, mid).first >= k)
+                right = mid - 1;
+            else
+                left = mid + 1;
         }
-        return ans;
+        auto [count, sum] = countAndSum(nums, n, left);
+        // There can be more subarrays with the same sum of left.
+        return sum - left * (count - k);
     }
 };
