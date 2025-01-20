@@ -3,12 +3,12 @@ public:
     int majorityElement(vector<int>& nums) {
         int ele;
         int count =0;
-        for(auto it : nums){
+        for(int i=0; i<nums.size();i++){
             if(count == 0){
-                ele = it;
+                ele = nums[i];
                 count++;
             }
-            else if(it == ele){
+            else if(nums[i] == ele){
                 count++;
             }
             else{
