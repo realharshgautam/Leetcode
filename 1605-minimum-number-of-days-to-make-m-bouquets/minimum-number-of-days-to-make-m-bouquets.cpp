@@ -1,44 +1,38 @@
 class Solution {
 public:
-    int minDays(vector<int>& bloomDay, int m, int k) {
-        if ((long long)m * k > bloomDay.size()) {
-            return -1;
-        }
-
-        int low = 1, high = 1e9;
-        while (low < high) {
-            int mid = low + (high - low) / 2;
-
-            if (canMakeBouquets(bloomDay, m, k, mid)) {
-                high = mid;
-            } else {
-                low = mid + 1;
+    bool possible(int n, vector<int> nums, int day, int k, int m) {
+        int cnt = 0;
+        int noOfB = 0;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] <= day)
+                cnt++;
+            else {
+                noOfB += cnt / k;
+                cnt = 0;
             }
         }
-
-        return low;
+        noOfB += cnt / k;
+        return noOfB >= m;
     }
+    int minDays(vector<int>& nums, int m, int k) {
+        long long val = k * 1ll * m * 1ll;
+        int n =nums.size();
+        if (n < val)
+            return -1;
 
-private:
-    bool canMakeBouquets(vector<int>& bloomDay, int m, int k, int day) {
-        int total = 0;
-        for (int i = 0; i < bloomDay.size(); i++) {
-            int count = 0;
-            while (i < bloomDay.size() && count < k && bloomDay[i] <= day) {
-                count++;
-                i++;
-            }
-
-            if (count == k) {
-                total++;
-                i--;
-            }
-
-            if (total >= m) {
-                return true;
-            }
+        int mini = INT_MAX, maxi = INT_MIN;
+        for (int i = 0; i < n; ++i) {
+            maxi = max(nums[i], maxi);
+            mini = min(nums[i], mini);
         }
-
-        return false;
+        int left = mini, right = maxi;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (possible(n, nums, mid, k, m)) {
+                right = mid - 1;
+            } else
+                left = mid + 1;
+        }
+        return left;
     }
 };
