@@ -1,6 +1,8 @@
 class Solution {
-private:
-    long long reqHours(vector<int>nums, int hours){
+
+    
+public:
+long long reqHours(vector<int>nums, int hours){
         long long sum=0;
         int n =nums.size();
         for(int i=0;i<n;i++){
@@ -8,7 +10,7 @@ private:
         }
         return sum;
     }
-public:
+
 int minEatingSpeed(vector<int>&nums, int h) {
     int low =1; 
     int high = *max_element(nums.begin(), nums.end());
