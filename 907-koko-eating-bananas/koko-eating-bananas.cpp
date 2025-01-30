@@ -2,7 +2,8 @@ class Solution {
 private:
     long long reqHours(vector<int>nums, int hours){
         long long sum=0;
-        for(int i=0;i<nums.size();i++){
+        int n =nums.size();
+        for(int i=0;i<n;i++){
             sum+= ceil((double)nums[i]/(double)hours);
         }
         return sum;
