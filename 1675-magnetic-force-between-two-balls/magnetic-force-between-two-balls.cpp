@@ -1,35 +1,30 @@
 class Solution {
-public:
-    int maxDistance(vector<int>& position, int m) {
-        sort(position.begin(), position.end());
-        int lo = 1;
-        int hi = (position.back() - position[0]) / (m - 1);
-        int ans = 1;
-        while (lo <= hi) {
-            int mid = lo + (hi - lo) / 2;
-            if (canWePlace(position, mid, m)) {
-                ans = mid;
-                lo = mid + 1;
-            } else {
-                hi = mid - 1;
-            }
-        }
-        return ans;
-    }
-
 private:
-    bool canWePlace(const vector<int>& arr, int dist, int balls) {
-        int countBalls = 1;
-        int lastPlaced = arr[0];
-        for (int i = 1; i < arr.size(); i++) {
-            if (arr[i] - lastPlaced >= dist) {
-                countBalls++;
-                lastPlaced = arr[i];
+    bool canWePlace(vector<int> &nums, int dist, int minCnt) {
+        int cnt = 1, last = nums[0];
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] - last >= dist) {
+                cnt++;
+                last = nums[i];
             }
-            if (countBalls >= balls) {
-                return true;
-            }
+            if (cnt >= minCnt) return true;
         }
         return false;
+    }
+
+   public:
+    int maxDistance(vector<int> &nums, int k) {
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        int low = 1, high = nums[n - 1] - nums[0];
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (canWePlace(nums, mid, k) == true) {
+                low = mid + 1;
+            } else
+                high = mid - 1;
+        }
+        return high;
     }
 };
