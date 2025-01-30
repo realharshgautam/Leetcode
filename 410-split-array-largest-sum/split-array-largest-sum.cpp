@@ -1,19 +1,19 @@
 class Solution {
    public:
-    int countStudents(vector<int> &nums, int pages) {
-        int pagesStudent = 0;
-        int student = 1;
+    int countSplits(vector<int> &nums, int maxSum) {
+        int sum = 0;
+        int splits = 1;
         int n = nums.size();
 
         for (int i = 0; i < n; i++) {
-            if (pagesStudent + nums[i] <= pages) {
-                pagesStudent += nums[i];
+            if (sum + nums[i] <= maxSum) {
+                sum += nums[i];
             } else {
-                student++;
-                pagesStudent = nums[i];
+                splits++;
+                sum = nums[i];
             }
         }
-            return student;
+            return splits;
     }
     int splitArray(vector<int> &nums, int m) {
         int n = nums.size();
@@ -22,8 +22,8 @@ class Solution {
 
         while (low <= high) {
             int mid = (low + high) / 2;
-            int students = countStudents(nums, mid);
-            if (students > m) {
+            int splits = countSplits(nums, mid);
+            if (splits > m) {
                 low = mid + 1;
             } else {
                 high = mid - 1;
