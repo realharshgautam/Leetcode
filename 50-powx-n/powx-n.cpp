@@ -1,25 +1,35 @@
 class Solution {
-public:
-    double myPow(double x, int n) {
-        // Handle the case when n is negative
-        long long power = n; // Use long long to handle edge case when n = INT_MIN
-        if (power < 0) {
-            x = 1 / x;
-            power = -power;
-        }
-        
-        double result = 1.0;
-        double current_product = x;
+private :
 
-        // Exponentiation by squaring
-        while (power > 0) {
-            if (power % 2 == 1) { // If power is odd
-                result *= current_product;
-            }
-            current_product *= current_product; // Square the current product
-            power /= 2; // Halve the power
+     double power(double x, long n) {
+        // Base case: anything raised to 0 is 1
+        if (n == 0) return 1.0;
+
+        // Base case: anything raised to 1 is itself
+        if (n == 1) return x;
+
+        // If 'n' is even
+        if (n % 2 == 0) {
+            // Recursive call: x * x, n / 2
+            return power(x * x, n / 2);
         }
-        
-        return result;
+        // If 'n' is odd
+        // Recursive call: x * power(x, n-1)
+        return x * power(x, n - 1);
+    }
+
+public:
+
+     double myPow(double x, int n) {
+        // Store the value of n in a separate variable
+        long long num = n;
+
+        // If n is negative
+        if (num < 0) {
+            // Calculate the power of -n and take reciprocal
+            return (1.0 / power(x, -1 * num));
+        }
+        // If n is non-negative
+        return power(x, num);
     }
 };
