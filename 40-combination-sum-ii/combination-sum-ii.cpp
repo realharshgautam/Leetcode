@@ -1,23 +1,34 @@
 class Solution {
-public:
-    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
-        sort(candidates.begin(), candidates.end());
-        vector < vector < int >> ans;
-        vector < int > ds;
-        findCombination(0, target, candidates, ans, ds);
-        return ans;
-    }
-    void findCombination(int ind, int target, vector < int > & arr, vector < vector < int >> & ans, vector < int > & ds) {
-        if (target == 0) {
-            ans.push_back(ds);
+   private:
+    // Recursive helper function to find combinations
+    void func(int ind, int sum, vector<int> &nums, vector<int> &candidates,
+              vector<vector<int>> &ans) {
+        if (sum == 0) {
+            ans.push_back(nums);
             return;
         }
-        for (int i = ind; i < arr.size(); i++) {
-            if (i > ind && arr[i] == arr[i - 1]) continue;
-            if (arr[i] > target) break;
-            ds.push_back(arr[i]);
-            findCombination(i + 1, target - arr[i], arr, ans, ds);
-            ds.pop_back();
+
+        if (sum < 0 || ind == candidates.size()) return;
+
+        nums.push_back(candidates[ind]);
+        func(ind + 1, sum - candidates[ind], nums, candidates, ans);
+        nums.pop_back();
+
+        for (int i = ind + 1; i < candidates.size(); i++) {
+            if (candidates[i] != candidates[ind]) {
+                func(i, sum, nums, candidates, ans);
+                break;
+            }
         }
+    }
+
+   public:
+    vector<vector<int>> combinationSum2(vector<int> &candidates, int target) {
+        vector<vector<int>> ans;
+        vector<int> nums;
+        sort(candidates.begin(), candidates.end());
+
+        func(0, target, nums, candidates, ans);
+        return ans;
     }
 };
