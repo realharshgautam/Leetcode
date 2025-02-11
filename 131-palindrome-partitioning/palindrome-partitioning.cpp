@@ -1,45 +1,29 @@
 class Solution {
 public:
-    vector<vector<string>> partition(string s) {
-        int n = s.length();
-        vector<vector<bool>> dp(n, vector<bool>(n, false));
-
-        // Initialize the DP table for single characters and pairs
-        for (int i = 0; i < n; ++i) {
-            dp[i][i] = true;
-        }
-        for (int length = 2; length <= n; ++length) {
-            for (int i = 0; i <= n - length; ++i) {
-                int j = i + length - 1;
-                if (s[i] == s[j] && (length == 2 || dp[i + 1][j - 1])) {
-                    dp[i][j] = true;
-                }
-            }
-        }
-
-        vector<vector<string>> result;
-        vector<string> path;
-        backtrack(s, 0, path, result, dp);
-        return result;
+    vector<vector<string> > partition(string s) {
+       vector<vector<string>>res;
+       vector<string>path;
+       dfs(0,s,path,res);
+       return res;
     }
-
-private:
-    void backtrack(const string& s, int start, vector<string>& path, vector<vector<string>>& result, const vector<vector<bool>>& dp) {
-        // If we've reached the end of the string, add the current partition to the result list
-        if (start == s.length()) {
-            result.push_back(path);
+    void dfs(int ind, string s, vector<string>&path, vector<vector<string>>&res){
+        if(ind == s.size()){
+            res.push_back(path);
             return;
         }
-        // Explore all possible partitions
-        for (int end = start; end < s.length(); ++end) {
-            // Use the DP table to check if the substring s[start:end+1] is a palindrome
-            if (dp[start][end]) {
-                path.push_back(s.substr(start, end - start + 1));
-                // Recur to find other partitions
-                backtrack(s, end + 1, path, result, dp);
-                // Backtrack to explore other partitions
+        for(int i=ind;i<s.size();i++){
+            if(isPalindrome(s,ind,i)){
+                path.push_back(s.substr(ind, i-ind+1));
+                dfs(i+1,s,path,res);
                 path.pop_back();
             }
         }
+    }
+
+    bool isPalindrome(string s, int left , int right){
+        while(left<=right){
+            if(s[left++]!=s[right--]) return false;
+        }
+        return true;
     }
 };
